@@ -62,17 +62,22 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post("http://localhost:8080/login", { email, password });
-      const data = response.data;
-      localStorage.setItem("token", data.token);
-      navigate("/");
-    } catch (error) {
-      console.error("Xəta:", error.response?.data || error.message);
-      alert(
-        error.response?.data?.message || "Giriş zamanı xəta baş verdi"
-      );
-    }
+      try {
+        const response = await axios.post("http://localhost:8080/login", { email, password });
+        const data = response.data;
+    
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("role", data.user.role);  // role-u yadda saxlayırıq
+    
+        if (data.user.role === "admin") {
+          navigate("/admin"); // Admin Panelə yönləndir
+        } else {
+          navigate("/"); // Adi istifadəçi üçün Home səhifəsinə yönləndir
+        }
+      } catch (error) {
+        console.error("Xəta:", error.response?.data || error.message);
+        alert(error.response?.data?.message || "Giriş zamanı xəta baş verdi");
+      }
   };
   return (
     <>

@@ -1,0 +1,55 @@
+.container {
+  background-color: #8b0000; /* Dark red */
+  padding: 20px;
+  min-height: 100vh; /* Tam ekran yüksəkliyi */
+  .error-message {
+    color: #ff4d4d; /* Parlaq qırmızı */
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    .col {
+      display: flex;
+      justify-content: center;
+      margin: 2rem 1rem; 
+      .card {
+        width: 230px;
+        background-color: #5a0000; 
+        border-radius: 10px;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        &:hover {
+          transform: scale(1.05); 
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); 
+        }
+        img {
+          height: 300px;
+          width: 230px;
+          object-fit: cover;
+          border-bottom: 2px solid #ff4d4d;  
+        }
+        .meta {
+          color: #f5deb3; 
+          font-size: 1rem;
+          padding: 10px;
+        }
+        h3 {
+          color: wheat; 
+          margin-top: 10px;
+          text-align: center;
+        }
+        p {
+          span {
+            color: wheat; /* Qızıl rəngi */
+            font-size: 1.2rem;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+}

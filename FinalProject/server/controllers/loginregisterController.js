@@ -47,14 +47,21 @@ const login = async (req,res) => {
        }
 
       const token =  jwt.sign({
-        email: exitsUser.email, role: exitsUser.role
-      }, process.env.JWT_SECRET, { expiresIn: "4w" });
+       id: exitsUser._id, email: exitsUser.email, role: exitsUser.role
+      }, process.env.JWT_SECRET, { expiresIn: "672h" });
+
+
 
       console.log(token);
       
 
        res.json({
-        message: "logined is successfully", exitsUser,token
+        message: "logined is successfully",  user: {
+            id: exitsUser._id,
+            name: exitsUser.name,
+            email: exitsUser.email,
+            role: exitsUser.role,
+          }, token
        })
     } catch (error) {
         res.json({
