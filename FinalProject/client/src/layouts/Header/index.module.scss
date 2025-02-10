@@ -1,34 +1,110 @@
-header{
+header {
   background-color: black;
   padding: 1rem 0;
-//   height: 100px;
-  .header{
+
+  .header {
     display: flex;
     flex-direction: column;
-    .logo{
-        display: flex;
-        justify-content: center;
-        img{
-            width: 300px;
-            height: 130px;
-        }
-    }
-    ul{
-        display: flex;
-        justify-content: center;
-        list-style: none;
-        gap: 2rem;
-        li{
+    position: relative;
 
-            a{
-                color: white;
-                text-decoration: none;
-                &:hover{
-                  color: red;
-                //   font-size: 18px;
-                }
+    .logo {
+      display: flex;
+      justify-content: center;
+      img {
+        width: 300px;
+        height: 120px;
+      }
+    }
+
+    /* Menu Icon (Mobil üçün) */
+    .menuIcon {
+      display: none;
+      cursor: pointer;
+      font-size: 2rem;
+      color: white;
+      position: absolute;
+      left: 1rem;
+      top: 1rem;
+    }
+
+    /* Sidebar (Mobil menyu) */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -250px; /* Default olaraq gizlidir */
+      height: 100vh;
+      width: 250px;
+      z-index: 999;
+      background-color: black;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding-top: 2rem;
+      transition: left 0.3s ease-in-out;
+
+      /* Açılma animasiyası */
+      &.showSidebar {
+        left: 0;
+      }
+
+      /* Bağlama iconu */
+      .closeIcon {
+        font-size: 2rem;
+        color: white;
+        cursor: pointer;
+        margin-left: auto;
+        margin-right: 1rem;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        width: 100%;
+        li {
+          width: 100%;
+          padding: 1rem;
+          text-align: left;
+          a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            display: block;
+            &:hover {
+              background: red;
             }
+          }
         }
+      }
+    }
+
+    /* Desktop menyu (Sənin dizaynın olduğu kimi qalır) */
+    .desktopMenu {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      gap: 2rem;
+      padding: 0;
+      li {
+        a {
+          color: white;
+          text-decoration: none;
+          font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+          &:hover {
+            color: red;
+          }
+        }
+      }
+    }
+
+    /* Mobil üçün responsive tənzimləmələr */
+    @media (max-width: 768px) {
+      .desktopMenu {
+        display: none;
+      }
+      .menuIcon {
+        display: block;
+      }
     }
   }
 }

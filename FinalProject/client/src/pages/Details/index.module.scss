@@ -1,0 +1,27 @@
+.row1{
+    display: flex;
+    background-color: #F3F4F6;
+    .common{
+        display: flex;
+        justify-content: center;
+        .col1{
+            padding-top: 2rem;
+            padding-left: 3rem;
+            padding-bottom: 2rem;
+            img{
+                height: 500px;
+                border-radius: 5px;
+            }
+        }
+        .col2{
+            padding-top: 2rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            p{
+               color: #333333;
+               font-family: cursive;
+               font-size: 18px;
+            }
+        }
+    }
+}
