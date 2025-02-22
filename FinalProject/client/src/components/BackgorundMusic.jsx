@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { BsFillVolumeUpFill, BsFillVolumeMuteFill } from "react-icons/bs";
-import musicFile from "../assets/music.mp3"; // Musiqi faylını əlavə et
+import musicFile from "../assets/music.mp3"; 
 
 const BackgroundMusic = () => {
   const audioRef = useRef(new Audio(musicFile));

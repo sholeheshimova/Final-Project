@@ -4,7 +4,7 @@ import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/Home";
 import Details from "./pages/Details";
 import Catogories from "./pages/Catogoires";
-import Accessories from "./pages/Accessories";
+import Premium from "./pages/Premium";
 import Favorites from "./pages/Favorites";
 import Trailers from "./pages/Trailers";
 import Login from "./pages/Login";
@@ -19,7 +19,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/marvels/:id" element={<Details />} />
           <Route path="/categories" element={<Catogories />} />
-          <Route path="/accessories" element={<Accessories />} />
+          <Route path="/premium" element={<Premium />} />
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/marvels/trailers/:id" element={<Trailers />} />
         </Route>

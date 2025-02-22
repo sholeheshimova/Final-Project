@@ -77,8 +77,8 @@ const Login = () => {
         navigate("/");
       }
     } catch (error) {
-      console.error("Xəta:", error.response?.data || error.message);
-      alert(error.response?.data?.message || "Giriş zamanı xəta baş verdi");
+      console.error("Error:", error.response?.data || error.message);
+      alert(error.response?.data?.message || "An error occurred during login");
     }
   };
   return (
@@ -93,14 +93,14 @@ const Login = () => {
           <input
             type="email"
             id="email"
-            placeholder="Email ünvanınızı daxil edin"
+            placeholder="Please enter your email:"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             style={inputStyle}
             required
           />
           <label htmlFor="password" style={labelStyle}>
-            Şifrə:
+            Password:
           </label>
           <input
             type="password"
@@ -112,7 +112,7 @@ const Login = () => {
             required
           />
           <button type="submit" style={buttonStyle}>
-            Giriş et
+            Login
           </button>
         </form>
       </div>

@@ -67,17 +67,17 @@ const Register = () => {
     e.preventDefault();
     try {
         const response = await axios.post('http://localhost:8080/register', { name, email, password });
-        alert("Qeydiyyat uğurlu oldu!");
+        alert("Registration was successful!");
         navigate('/login');
     } catch (error) {
-        console.error("Xəta detalları:", error);
+        console.error("Error details:", error);
 
         if (error.response) {
-            alert(error.response.data.message || "Serverdən naməlum xəta cavabı gəldi.");
+            alert(error.response.data.message || "An unknown error response was received from the server.");
         } else if (error.request) {
-            alert("Serverə qoşulmaq mümkün olmadı. Backend işləyir?");
+            alert("Failed to connect to server. Does the backend work?");
         } else {
-            alert("Naməlum xəta baş verdi: " + error.message);
+            alert("An unknown error has occurred: " + error.message);
         }
     }
 };
@@ -92,7 +92,7 @@ const Register = () => {
         <input
           type="text"
           id="username"
-          placeholder="İstifadəçi adınızı daxil edin"
+          placeholder="Enter your username"
           value={name}
           onChange={(e) => setName(e.target.value)}
           style={inputStyle}
@@ -102,23 +102,23 @@ const Register = () => {
         <input
           type="email"
           id="email"
-          placeholder="Email ünvanınızı daxil edin"
+          placeholder="Please enter your email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           style={inputStyle}
           required
         />
-        <label htmlFor="password" style={labelStyle}>Şifrə:</label>
+        <label htmlFor="password" style={labelStyle}>Password:</label>
         <input
           type="password"
           id="password"
-          placeholder="Şifrənizi daxil edin"
+          placeholder="Enter password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           style={inputStyle}
           required
         />
-        <button type="submit" style={buttonStyle}>Qeydiyyatdan keç</button>
+        <button type="submit" style={buttonStyle}>Register</button>
       </form>
     </div>
     </>

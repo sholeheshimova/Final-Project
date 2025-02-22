@@ -14,6 +14,7 @@ const port = 8080
 
 app.use(cors())
 app.use(express.json())
+// app.use(express.urlencoded({ extended: true }))
 
 app.use("/marvels", filmRouter)
 app.use("/reviews", reviewRouter)

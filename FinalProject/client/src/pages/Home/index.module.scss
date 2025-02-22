@@ -29,7 +29,8 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 1.8rem;
+    gap: 2rem;
+    padding: 2rem;
     .col {
       display: flex;
       justify-content: center;
@@ -39,6 +40,7 @@
       .card {
         width: 100%;
         max-width: 230px;
+        height: 580px;
         background-color: #5a0000; 
         border-radius: 10px;
         overflow: hidden;
@@ -65,7 +67,7 @@
         }
         p {
           span {
-            color: wheat; /* Qızıl rəngi */
+            color: wheat; 
             font-size: 1.2rem;
             font-weight: bold;
           }
@@ -88,8 +90,8 @@
     padding: 10px;
 
     .blurredBackground {
-      height: 300px; // Kiçik ekranlar üçün hündürlük azalır
-      filter: blur(3px); // Daha az blur efekti
+      height: 300px; 
+      filter: blur(3px); 
     }
 
     .row {
@@ -103,28 +105,28 @@
         // margin: 1rem 0; 
 
         .card {
-          width: 90%; // Kartlar tam ekran olmayacaq, amma genişlənəcək
-          max-width: 280px; // Maksimum eni təyin edilir
+          width: 90%; 
+          max-width: 280px; 
           height: 680px;
-          margin: 0 auto; // Mərkəzləşdirmək üçün
+          margin: 0 auto; 
 
           img {
-            width: 100%; // Şəkil kartın eninə uyğun olacaq
-            height: auto; // Oran qorunacaq
+            width: 100%; 
+            height: auto; 
           }
         }
       }
     }
 
     .btns {
-      flex-direction: row; // İkonlar horizontal qalır
+      flex-direction: row; 
       padding-top: 1rem;
     }
 
     .search-bar {
-      width: 100%; // Axtarış inputu tam ekran olacaq
+      width: 100%; 
       max-width: 500px;
-      margin: 10px auto; // Ortaya gətiririk
+      margin: 10px auto; 
     }
   }
 }
@@ -133,12 +135,12 @@
   .row {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Tək element qalanda ortalansın */
+    align-items: center;
     justify-content: center;
 
     .col {
       flex: 1 1 100%;
-    max-width: 400px; /* Kart çox geniş olmasın */
+    max-width: 400px; 
     width: 100%;
     }
   }

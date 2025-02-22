@@ -22,7 +22,7 @@ const Details = () => {
       const token = localStorage.getItem("token");
 
       if (!token) {
-        setError("Yetərsiz icazə! Zəhmət olmasa giriş edin.");
+        setError("Insufficient permission! Please login..");
         return;
       }
 

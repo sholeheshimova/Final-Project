@@ -35,13 +35,10 @@ const Header = () => {
               <NavLink to={"/categories"} onClick={toggleMenu}>Categories</NavLink>
             </li>
             <li>
-              <NavLink to={"/marvels/:id"} onClick={toggleMenu}>Details</NavLink>
-            </li>
-            <li>
               <NavLink to={"/favorites"} onClick={toggleMenu}>Favorites</NavLink>
             </li>
             <li>
-              <NavLink to={"/accessories"} onClick={toggleMenu}>Accessories</NavLink>
+              <NavLink to={"/premium"} onClick={toggleMenu}>Premium</NavLink>
             </li>
             <li>
               <NavLink to={"/login"} onClick={toggleMenu}>Login</NavLink>
@@ -61,18 +58,16 @@ const Header = () => {
             <li>
               <NavLink to={"/categories"}>Categories</NavLink>
             </li>
-            <li>
-              <NavLink to={"/marvels/:id"}>Details</NavLink>
-            </li>
+           
             <li>
               <NavLink to={"/favorites"}>Favorites</NavLink>
             </li>
             <li>
-              <NavLink to={"/accessories"}>Accessories</NavLink>
+              <NavLink to={"/premium"}>Premium</NavLink>
             </li>
-            <li>
+            {/* <li>
               <NavLink to={"/marvels/trailers/:id"}>Trailers</NavLink>
-            </li>
+            </li> */}
           </ul>
         </nav>
       </div>

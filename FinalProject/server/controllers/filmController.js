@@ -56,49 +56,67 @@ const getFilmsById = async (req, res) => {
 
 const deleteFilm = async (req, res) => {
   const token = req.headers.authorization;
+  console.log(token);
+  
   const { id } = req.params;
+  console.log(id);
+  
   if (!token) {
     return res.status(401).json({ message: "Authorization token required" });
   }
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const jwtToken = token.split(" ")[1];
+    const decoded = jwt.verify(jwtToken, process.env.JWT_SECRET);
+    console.log(decoded);
+    
+    
 
     if (decoded.role !== "admin") {
-      // Admin yoxlanması əlavə edildi
+   
       return res.status(403).json({ message: "Access denied. Admins only." });
     }
 
     const deletedResponse = await marvelModel.findByIdAndDelete(id);
-    res.json(deletedResponse);
-  } catch (error) {
     res.json({
-      message: "error",
+      message: "done", deletedResponse
+    })
+    console.log(deletedResponse);
+    
+  } catch (error) {
+    res.status(401).json({
+      message: error.message
     });
   }
 };
 
 const postFilm = async (req, res) => {
   const token = req.headers.authorization;
-  if (!token) {
+  console.log("Gələn Token:", token); 
+  
+  if (!token || !token.startsWith("Bearer ")) {
     return res.status(401).json({ message: "Authorization token required" });
   }
+  
+ 
+  const jwtToken = token.split(" ")[1];
+  
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-    if (decoded.role !== "admin") {
-      // Admin yoxlanması əlavə edildi
-      return res.status(403).json({ message: "Access denied. Admins only." });
-    }
-
-    const newFilm = new marvelModel({ ...req.body });
+    const decoded = jwt.verify(jwtToken, process.env.JWT_SECRET);
+    console.log("Decoded Token:", decoded);
+    const newFilm =  new marvelModel({...req.body})
     await newFilm.save();
-    res.json(newFilm);
+    res.status(201).json({
+      message: "Posted successfully"
+    })
+
+    
   } catch (error) {
-    res.json({
-      message: "error",
-    });
+    console.error("Token Xətasi:", error.message);
+    return res.status(401).json({ message: "error", error: "invalid token" });
   }
+  
 };
+
 
 const editFilm = async (req, res) => {
   const token = req.headers.authorization;
@@ -110,7 +128,7 @@ const editFilm = async (req, res) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     if (decoded.role !== "admin") {
-      // Admin yoxlanması əlavə edildi
+     
       return res.status(403).json({ message: "Access denied. Admins only." });
     }
 
@@ -121,6 +139,7 @@ const editFilm = async (req, res) => {
     );
     res.json(updatedFilm);
   } catch (error) {
+
     res.json({ message: error.message });
   }
 };
