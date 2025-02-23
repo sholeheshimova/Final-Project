@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Table, Button, message, Modal, Form, Input } from "antd";
+import { Table, Button, message, Modal, Form, Input, Upload } from "antd";
+import { UploadOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { Menu } from "antd";
-import { PieChartOutlined, VideoCameraOutlined } from "@ant-design/icons";
-import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
+import { PieChartOutlined,VideoCameraOutlined } from "@ant-design/icons";
+import { PieChart, Pie, Cell, Tooltip} from "recharts";
 import styles from "../Admin/index.module.scss";
 
 const BASE_URL = "http://localhost:8080/marvels";
@@ -15,6 +16,7 @@ const Admin = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editFilm, setEditFilm] = useState(null);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [file, setFile] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -74,22 +76,32 @@ const Admin = () => {
   };
 
   const addFilm = async (values) => {
-    console.log(values);
+    const formData = new FormData();
+    formData.append("title", values.title);
+    formData.append("date", values.date);
+    if (file) {
+      formData.append("image", file);
+    }
 
     try {
       const token = localStorage.getItem("token");
-      console.log("Göndərilən Token:", token);
-      const response = await axios.post(BASE_URL, values, {
-        headers: { Authorization: `Bearer ${token}` },
+      await axios.post(BASE_URL, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
       });
-      console.log(response);
 
       message.success("Film is added!");
       setIsAddModalOpen(false);
       fetchFilms();
     } catch (error) {
-      message.error("Film is not add!");
+      message.error("Film is not added!");
     }
+  };
+
+  const handleFileChange = ({ file }) => {
+    setFile(file.originFileObj);
   };
 
   const columns = [
@@ -200,6 +212,17 @@ const Admin = () => {
             <Form.Item name="date" label="Date" rules={[{ required: true }]}>
               <Input />
             </Form.Item>
+            <Form.Item label="Upload Image">
+            <Upload
+              beforeUpload={(file) => {
+                setFile(file);
+                return false;
+              }}
+              showUploadList={true}
+            >
+              <Button icon={<UploadOutlined />}>Select Image</Button>
+            </Upload>
+          </Form.Item>
             <Button type="primary" htmlType="submit">
               Remember it!
             </Button>
@@ -218,6 +241,9 @@ const Admin = () => {
             </Form.Item>
             <Form.Item name="date" label="Date" rules={[{ required: true }]}>
               <Input />
+            </Form.Item>
+            <Form.Item label="Image">
+              <Upload beforeUpload={() => false} onChange={handleFileChange}> <Button icon= {<UploadOutlined />}>Upload Image</Button></Upload>
             </Form.Item>
             <Button type="primary" htmlType="submit">
               Add

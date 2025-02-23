@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Table } from "antd";
+import { Card, Row, Col } from "antd";
 import styles from "../Catogoires/index.module.scss";
 
 const BASE_URL = "http://localhost:8080/marvels"; 
@@ -33,7 +33,6 @@ const Categories = () => {
     getAllFilms();
   }, []);
 
-
   const categories = {
     "Iron Man": ["Iron Man", "Iron Man 2", "Iron Man 3"],
     "Thor": ["Thor", "Thor: The Dark World", "Thor: Ragnarok", "Thor: Love and Thunder"],
@@ -46,38 +45,38 @@ const Categories = () => {
     "Loki": ["Loki"]
   };
 
- 
-  const categorizedData = Object.entries(categories).map(([category, movieList]) => ({
-    key: category,
-    category,
-    movies: films
-      .filter(film => movieList.includes(film.title))
-      .map(film => film.title)
-      .join(", ")
-  }));
-
-  
-  const columns = [
-    {
-      title: "Category",
-      dataIndex: "category",
-      key: "category",
-      render: (text) => <strong style={{ color: "wheat" }}>{text}</strong>,
-    },
-    {
-      title: "Movies",
-      dataIndex: "movies",
-      key: "movies",
-      render: (text) => <span style={{ color: "wheat" }}>{text}</span>,
-    }
-  ];
-
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Movie Categories</h2>
-      <Table className={styles.table} dataSource={categorizedData} columns={columns} pagination={false} />
+      {Object.entries(categories).map(([category, movieList]) => {
+        const categoryMovies = films.filter(film => movieList.includes(film.title));
+
+        return (
+          <div key={category} className={styles.category}>
+            <h3 className={styles.categoryTitle}>{category}</h3>
+            <Row gutter={[16, 16]}>
+              {categoryMovies.length > 0 ? (
+                categoryMovies.map((film) => (
+                  <Col key={film._id} xs={24} sm={12} md={8} lg={6}>
+                    <Card
+                      hoverable
+                      cover={<img alt={film.title} src={film.image} className={styles.cardImage} />}
+                      className={styles.card}
+                    >
+                      <Card.Meta title={film.title} description={`Release Date: ${film.date}`} />
+                    </Card>
+                  </Col>
+                ))
+              ) : (
+                <p className={styles.noMovies}>No movies available</p>
+              )}
+            </Row>
+          </div>
+        );
+      })}
     </div>
   );
 };
 
 export default Categories;
+
